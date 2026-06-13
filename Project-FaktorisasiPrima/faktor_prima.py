@@ -19,10 +19,6 @@ def deret_prima(n):
             bil_prima.append(i)
     return bil_prima        
 
-
-# Masih dalam pengembangan ygy
-# Fitur mencari nya masih terbatas, sama kek kalkulator FPB dan KPK
-
 # Bilangan yang dicari
 def faktorisasi_prima(n):
     n = int(input("Masukan bilangan: "))
