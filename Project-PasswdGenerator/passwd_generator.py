@@ -1,38 +1,40 @@
 import random as rd
 
 print ("—"*10,"PASSWORD GENERATOR","—"*10)
-len_passwd = int(input("Panjang kata sandi:"))
-level_keamanan = int(input("[1]rendah,[2]sedang,[3]tinggi\n:"))
+len_passwd = int(input("Panjang kata sandi: "))
+print ("Level keamanan")
+level_keamanan = int(input("[1]rendah\n[2]sedang\n[3]tinggi\n:"))
 
 number = [0,1,2,3,4,5,6,7,8,9]
 word = ["a","b","c","d","e","f","g","h","i","j","k","l","m","n","o","p","q","r","s","t","u","v","w","x","y","z"]
-symbol = ["@","#","$","_","&","-","+","(",")","/","*","'",":",";","!","?"]
+symbol = ["@","#","$","_","&","-","+","(",")","/","*","'","!","?"]
 
-# Hasil kata sandi yang di acak oleh algoritma
-your_passwd = []
-
-a = 0
-while a <= len_passwd:
-    if level_keamanan == 1:
-        your_passwd.append(str(rd.choice(number)))
-    elif level_keamanan == 2:
-        your_passwd.append(str(rd.choice(number)))
-        your_passwd.append(rd.choice(word))
-    elif level_keamanan == 3:
-        your_passwd.append(str(rd.choice(number)))
-        your_passwd.append(rd.choice(word))
-        your_passwd.append(rd.choice(symbol))   
-    a += 1
-
-# Konversi array menjadi string    
-hasil = "".join(your_passwd)
+def rnd_algorithm(a,b):
+    num_result = []
+    for i in range(1,b+1):
+        num_result.append(str(a[i]))
+    str_result = "".join(num_result)
+    return str_result        
     
-print ("Kata sandi anda: ",hasil)  
-simpan = str(input("Apakah anda ingin menyimpan kata sandi tersebut kedalam file?(Ya/tidak): "))  
-if simpan == "Ya":
-    with open("/sdcard/kata_sandi_anda.txt","w") as file:
-        file.write(hasil)
-    print ("Kata sandi anda telah berhasil disimpan!!")    
-        
-elif simpan == "tidak":
-    print ("Baiklah")        
+
+if level_keamanan == 1:
+    rd.shuffle(number)
+    print ("Kata sandi anda: ",rnd_algorithm(number,len_passwd))
+
+elif level_keamanan == 2:
+    # Meningkatkan kombinasi huruf
+    number.extend(word)
+    
+    rd.shuffle(number)
+    print ("Kata sandi anda: ",rnd_algorithm(number, len_passwd))
+
+elif level_keamanan == 3:
+    # Meningkatkan kombinasi huruf
+    number.extend(word)
+    number.extend(symbol)
+    
+    rd.shuffle(number)
+    print ("Kata sandi anda: ",rnd_algorithm(number, len_passwd))
+
+
+    
